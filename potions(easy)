@@ -1,0 +1,34 @@
+dump = int(input(""))
+numbers = input("").split()
+
+list = [int(x) for x in numbers]
+
+counter = 0
+sum_pot = 0
+list_dump = []
+
+most_neg = 0
+for i in range(dump):
+    if list[i] < 0: 
+        if sum_pot + list[i] >= 0: 
+            list_dump.append(list[i]) 
+            sum_pot += list[i]
+            counter += 1 
+            if most_neg > list[i]:
+                most_neg = list[i]
+
+        else: 
+            if most_neg <= list[i]: 
+                list_dump.remove(most_neg) 
+                list_dump.append(list[i])
+                sum_pot = sum_pot - most_neg + list[i]
+                most_neg = 0
+                for number in list_dump:
+                    if number < most_neg:
+                        most_neg = number
+    else: 
+        list_dump.append(list[i])
+        sum_pot += list[i]
+        counter += 1
+
+print(counter)
